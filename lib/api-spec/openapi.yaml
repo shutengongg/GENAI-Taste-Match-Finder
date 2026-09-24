@@ -10,7 +10,27 @@ servers:
 tags:
   - name: health
     description: Health operations
+  - name: taste
+    description: Movie recommendations
 paths:
+  /taste/recommend:
+    post:
+      operationId: recommendMovie
+      tags: [taste]
+      summary: Recommend one movie from three favorites
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TasteInput"
+      responses:
+        "200":
+          description: One movie recommendation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MovieRecommendation"
   /healthz:
     get:
       operationId: healthCheck
@@ -26,6 +46,20 @@ paths:
                 $ref: "#/components/schemas/HealthStatus"
 components:
   schemas:
+    TasteInput:
+      type: object
+      required: [book, music, third]
+      properties:
+        book: { type: string, minLength: 1, maxLength: 300 }
+        music: { type: string, minLength: 1, maxLength: 300 }
+        third: { type: string, minLength: 1, maxLength: 300 }
+    MovieRecommendation:
+      type: object
+      required: [title, year, one_sentence_rationale]
+      properties:
+        title: { type: string }
+        year: { type: integer }
+        one_sentence_rationale: { type: string }
     HealthStatus:
       type: object
       properties:
