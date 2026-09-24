@@ -1,0 +1,28 @@
+kind = "web"
+previewPath = "/"
+title = "Taste Match"
+description = "A single-page movie recommendation app that finds one tonally resonant film from three loved books or songs and records session-only feedback."
+version = "1.0.0"
+id = "artifacts/taste-match"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 25803
+
+[services.development]
+run = "pnpm --filter @workspace/taste-match run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/taste-match", "run", "build" ]
+serve = "static"
+publicDir = "artifacts/taste-match/dist/public"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "25803"
+BASE_PATH = "/"
