@@ -8,7 +8,7 @@ A user enters three things they love (a book, a song or artist, and one more boo
 
 ## How to Open the Prototype
 
-**Live prototype:** [PASTE YOUR REPLIT LINK HERE]
+**Live prototype:** [Website](https://taste-match-finder.replit.app)]
 
 Open the link, fill in all three boxes, and click **Find my movie**.
 
