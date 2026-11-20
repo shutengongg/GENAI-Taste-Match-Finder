@@ -1,0 +1,1 @@
+- [Taste Match scope](taste-match-scope.md) — session-only movie recommendation prototype; no login or unnecessary styling.

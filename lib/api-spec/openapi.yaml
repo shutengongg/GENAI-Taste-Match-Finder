@@ -53,13 +53,38 @@ components:
         book: { type: string, minLength: 1, maxLength: 300 }
         music: { type: string, minLength: 1, maxLength: 300 }
         third: { type: string, minLength: 1, maxLength: 300 }
+        excluded_titles:
+          type: array
+          items: { type: string, maxLength: 300 }
+        excluded_genres:
+          type: array
+          items:
+            $ref: "#/components/schemas/MovieGenre"
+    MovieGenre:
+      type: string
+      enum: [Action, Adventure, Animation, Comedy, Crime, Documentary, Drama, Family, Fantasy, History, Horror, Music, Mystery, Romance, Science Fiction, Thriller, War, Western]
+    InputNote:
+      type: object
+      required: [input, issue, note]
+      properties:
+        input: { type: string, enum: [book, music, third] }
+        issue: { type: string, enum: [unfamiliar, wrong_type, ambiguous] }
+        note: { type: string, minLength: 1 }
     MovieRecommendation:
       type: object
-      required: [title, year, one_sentence_rationale]
+      required: [title, year, one_sentence_rationale, genre, driver_input, confidence, input_notes]
       properties:
-        title: { type: string }
-        year: { type: integer }
-        one_sentence_rationale: { type: string }
+        title: { type: string, minLength: 1 }
+        year: { type: integer, minimum: 1888 }
+        one_sentence_rationale: { type: string, minLength: 1 }
+        genre:
+          $ref: "#/components/schemas/MovieGenre"
+        driver_input: { type: [string, "null"], enum: [book, music, third, null] }
+        confidence: { type: string, enum: [strong, loose] }
+        input_notes:
+          type: array
+          items:
+            $ref: "#/components/schemas/InputNote"
     HealthStatus:
       type: object
       properties:

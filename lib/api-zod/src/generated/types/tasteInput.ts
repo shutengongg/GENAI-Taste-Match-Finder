@@ -5,6 +5,7 @@
  * API specification
  * OpenAPI spec version: 0.1.0
  */
+import type { MovieGenre } from './movieGenre';
 
 export interface TasteInput {
   /**
@@ -22,4 +23,7 @@ export interface TasteInput {
      * @maxLength 300
      */
   third: string;
+  /** @items.maxLength 300 */
+  excluded_titles?: string[];
+  excluded_genres?: MovieGenre[];
 }

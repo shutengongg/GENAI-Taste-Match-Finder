@@ -5,9 +5,21 @@
  * API specification
  * OpenAPI spec version: 0.1.0
  */
+import type { InputNote } from './inputNote';
+import type { MovieGenre } from './movieGenre';
+import type { MovieRecommendationConfidence } from './movieRecommendationConfidence';
+import type { MovieRecommendationDriverInput } from './movieRecommendationDriverInput';
 
 export interface MovieRecommendation {
+  /** @minLength 1 */
   title: string;
+  /** @minimum 1888 */
   year: number;
+  /** @minLength 1 */
   one_sentence_rationale: string;
+  genre: MovieGenre;
+  /** @nullable */
+  driver_input: MovieRecommendationDriverInput;
+  confidence: MovieRecommendationConfidence;
+  input_notes: InputNote[];
 }

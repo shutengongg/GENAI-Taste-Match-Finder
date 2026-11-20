@@ -7,5 +7,11 @@
  */
 
 export * from './healthStatus';
+export * from './inputNote';
+export * from './inputNoteInput';
+export * from './inputNoteIssue';
+export * from './movieGenre';
 export * from './movieRecommendation';
+export * from './movieRecommendationConfidence';
+export * from './movieRecommendationDriverInput';
 export * from './tasteInput';

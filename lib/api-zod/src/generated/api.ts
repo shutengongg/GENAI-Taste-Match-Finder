@@ -17,18 +17,37 @@ export const recommendMovieBodyMusicMax = 300;
 
 export const recommendMovieBodyThirdMax = 300;
 
+export const recommendMovieBodyExcludedTitlesItemMax = 300;
+
 
 
 export const RecommendMovieBody = zod.object({
   "book": zod.string().min(1).max(recommendMovieBodyBookMax),
   "music": zod.string().min(1).max(recommendMovieBodyMusicMax),
-  "third": zod.string().min(1).max(recommendMovieBodyThirdMax)
+  "third": zod.string().min(1).max(recommendMovieBodyThirdMax),
+  "excluded_titles": zod.array(zod.string().max(recommendMovieBodyExcludedTitlesItemMax)).optional(),
+  "excluded_genres": zod.array(zod.enum(['Action', 'Adventure', 'Animation', 'Comedy', 'Crime', 'Documentary', 'Drama', 'Family', 'Fantasy', 'History', 'Horror', 'Music', 'Mystery', 'Romance', 'Science Fiction', 'Thriller', 'War', 'Western'])).optional()
 })
 
+
+export const recommendMovieResponseYearMin = 1888;
+
+
+
+
+
 export const RecommendMovieResponse = zod.object({
-  "title": zod.string(),
-  "year": zod.number().int(),
-  "one_sentence_rationale": zod.string()
+  "title": zod.string().min(1),
+  "year": zod.number().int().min(recommendMovieResponseYearMin),
+  "one_sentence_rationale": zod.string().min(1),
+  "genre": zod.enum(['Action', 'Adventure', 'Animation', 'Comedy', 'Crime', 'Documentary', 'Drama', 'Family', 'Fantasy', 'History', 'Horror', 'Music', 'Mystery', 'Romance', 'Science Fiction', 'Thriller', 'War', 'Western']),
+  "driver_input": zod.union([zod.literal('book'),zod.literal('music'),zod.literal('third'),zod.literal(null)]).nullable(),
+  "confidence": zod.enum(['strong', 'loose']),
+  "input_notes": zod.array(zod.object({
+  "input": zod.enum(['book', 'music', 'third']),
+  "issue": zod.enum(['unfamiliar', 'wrong_type', 'ambiguous']),
+  "note": zod.string().min(1)
+}))
 })
 
 

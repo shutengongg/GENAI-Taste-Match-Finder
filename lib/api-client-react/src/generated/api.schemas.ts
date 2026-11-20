@@ -5,6 +5,30 @@
  * API specification
  * OpenAPI spec version: 0.1.0
  */
+export type MovieGenre = typeof MovieGenre[keyof typeof MovieGenre];
+
+
+export const MovieGenre = {
+  Action: 'Action',
+  Adventure: 'Adventure',
+  Animation: 'Animation',
+  Comedy: 'Comedy',
+  Crime: 'Crime',
+  Documentary: 'Documentary',
+  Drama: 'Drama',
+  Family: 'Family',
+  Fantasy: 'Fantasy',
+  History: 'History',
+  Horror: 'Horror',
+  Music: 'Music',
+  Mystery: 'Mystery',
+  Romance: 'Romance',
+  Science_Fiction: 'Science Fiction',
+  Thriller: 'Thriller',
+  War: 'War',
+  Western: 'Western',
+} as const;
+
 export interface TasteInput {
   /**
      * @minLength 1
@@ -21,12 +45,68 @@ export interface TasteInput {
      * @maxLength 300
      */
   third: string;
+  /** @items.maxLength 300 */
+  excluded_titles?: string[];
+  excluded_genres?: MovieGenre[];
 }
 
+export type InputNoteInput = typeof InputNoteInput[keyof typeof InputNoteInput];
+
+
+export const InputNoteInput = {
+  book: 'book',
+  music: 'music',
+  third: 'third',
+} as const;
+
+export type InputNoteIssue = typeof InputNoteIssue[keyof typeof InputNoteIssue];
+
+
+export const InputNoteIssue = {
+  unfamiliar: 'unfamiliar',
+  wrong_type: 'wrong_type',
+  ambiguous: 'ambiguous',
+} as const;
+
+export interface InputNote {
+  input: InputNoteInput;
+  issue: InputNoteIssue;
+  /** @minLength 1 */
+  note: string;
+}
+
+/**
+ * @nullable
+ */
+export type MovieRecommendationDriverInput = typeof MovieRecommendationDriverInput[keyof typeof MovieRecommendationDriverInput] | null;
+
+
+export const MovieRecommendationDriverInput = {
+  book: 'book',
+  music: 'music',
+  third: 'third',
+} as const;
+
+export type MovieRecommendationConfidence = typeof MovieRecommendationConfidence[keyof typeof MovieRecommendationConfidence];
+
+
+export const MovieRecommendationConfidence = {
+  strong: 'strong',
+  loose: 'loose',
+} as const;
+
 export interface MovieRecommendation {
+  /** @minLength 1 */
   title: string;
+  /** @minimum 1888 */
   year: number;
+  /** @minLength 1 */
   one_sentence_rationale: string;
+  genre: MovieGenre;
+  /** @nullable */
+  driver_input: MovieRecommendationDriverInput;
+  confidence: MovieRecommendationConfidence;
+  input_notes: InputNote[];
 }
 
 export interface HealthStatus {
