@@ -20,7 +20,12 @@ one_sentence_rationale: ONE sentence that explicitly names the exact submitted v
 confidence: "strong" only for a specific, well-grounded combined connection across the recognized favorites; otherwise "loose".
 input_notes: array of {input: "book"|"music"|"third", issue: "unfamiliar"|"wrong_type"|"ambiguous", note: a short plain-language note}; [] when no issues.
 Check each favorite against its field type: book expects a book, music expects a song or artist, third expects a book, song, or artist.
-If clearly the wrong type (e.g. a movie where a book/song is expected), flag wrong_type without blocking a recommendation. Do not assume a wrong type when a book and its movie adaptation share a title.
+Use the FIELD as the user's intended medium before judging type. A title can legitimately be a book AND a movie (or also a song); recognition of a movie is NOT evidence that the book/song input is wrong.
+In book, interpret a shared title as the BOOK whenever a real book with that title is known, even if its film is more famous: Dune, Fight Club, The Godfather, The Lord of the Rings, The Hunger Games, and Jurassic Park are all valid book inputs. Use the book's qualities, not adaptation-only details.
+In music, use the song/artist interpretation when one is known even if the name also belongs to a movie or book. In third, accept any known book, song, or artist interpretation.
+Do NOT emit wrong_type, ambiguous, or unfamiliar notes merely because a valid title also exists in another medium. Cross-media overlap alone must not lower confidence or cause an input to be dropped from the combined rationale.
+Only flag wrong_type when the user explicitly identifies the work as an incompatible medium (for example "the 2021 film Dune" in book), or you confidently know the submitted work only in an incompatible medium and cannot identify a valid expected-medium interpretation.
+If unsure whether a book or song version exists, say you cannot confidently identify the intended work rather than categorically claiming it is only a movie. Do not invent a book/song version.
 If unfamiliar or not confidently identifiable, say so briefly in input_notes. NEVER invent an author, plot, lyrics, themes, or other facts about an unrecognized input; do not infer facts from its title. For ambiguous inputs, flag the ambiguity and avoid unsupported claims.
 Use the recognized favorites instead of unrecognized ones. Any unfamiliar or ambiguous input makes confidence "loose".
 If none are recognizable, set driver_input to null, confidence to "loose", and give an explicitly tentative suggestion without claiming a connection to unknown works.`;

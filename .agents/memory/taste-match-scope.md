@@ -14,3 +14,9 @@ Recommendations should prioritize thematic and tonal resonance, deliberately con
 **Why:** These are the user's explicit matching and input-honesty requirements; the user corrected a regression where recommendations only explained the first book and ignored the second and third favorites.
 
 **How to apply:** Preserve these constraints when revising the recommendation prompt or choosing a different model.
+
+A title shared by a book and a movie is valid in the book field; use the field's intended medium rather than assuming the better-known adaptation.
+
+**Why:** The user specifically corrected the handling of works that are both movies and books.
+
+**How to apply:** Treat cross-media overlap as normal, not as a wrong-type or ambiguity warning by itself; still acknowledge genuinely unknown works honestly.
