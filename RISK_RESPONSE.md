@@ -6,7 +6,7 @@ Over-reliance on a confident-sounding AI answer. The model may misread or simply
 
 ## Short paragraph (for the submission)
 
-The people affected are users who treat the recommendation as a reflection of their taste. If the model doesn't know an input and still sounds sure, the user may waste an evening or decide the product doesn't understand them. I changed the result so that it shows a "Strong match" or "Loose match" label, the reason uses all three inputs, the app says when it doesn't recognize an input and builds the match from the others, and the user can reject a film and get another from the same favorites. What remains: the label is the model's own judgment, not a measurement, and in my challenge test it said "Strong" even though one link was a stretch. The app also doesn't check that the film is real or a good fit, so a plausible-sounding wrong match is still possible. This connects to the course theme of over-reliance on AI: the design keeps the reasons visible and checkable against the user's own inputs, and gives them an easy way to say no.
+Users who treat the recommendation as a reflection of their taste could be affected. If the model doesn't know an input and still sounds sure, they may waste an evening or decide the product doesn't understand them. I changed the result to show a "Strong" or "Loose" match label, say when an input isn't recognized, and let the user reject a film and get another. What remains: the label is the model's own judgment (it said "Strong" when one link was a stretch), and the app doesn't check that the film is real, so a wrong match is still possible. This connects to over-reliance on AI: the reasons stay visible so users can check them against their own inputs.
 
 ## Evidence the risk is real
 
